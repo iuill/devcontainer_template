@@ -1,0 +1,38 @@
+FROM mcr.microsoft.com/devcontainers/python:3.12-bookworm
+
+# ---------------------------------------------------
+# uv
+# ref: https://docs.astral.sh/uv/guides/integration/docker/#installing-uv
+# ---------------------------------------------------
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# ---------------------------------------------------
+# 依存パッケージやビルド・デバッグ用ツールなど
+# ---------------------------------------------------
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && apt update \
+    && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
+    locales-all \
+    && apt autoremove -y \
+    && apt clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# ---------------------------------------------------
+# ロケール
+# ---------------------------------------------------
+ENV LANG=ja_JP.UTF-8
+ENV LANGUAGE=ja_JP:ja
+ENV LC_ALL=ja_JP.UTF-8
+ENV TZ=Asia/Tokyo
+
+# ---------------------------------------------------
+# アプリケーションコードのコピー
+# ---------------------------------------------------
+# WORKDIR /app
+# COPY ./src /app
+
+# ---------------------------------------------------
+# Pythonパッケージのインストール
+# ---------------------------------------------------
+# COPY requirements.txt /tmp/requirements.txt
+# RUN pip install --no-cache-dir -r /tmp/requirements.txt
