@@ -1,0 +1,27 @@
+{
+    "name": "App",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.debugpy",
+                "ms-python.vscode-pylance",
+                "charliermarsh.ruff",
+                "donjayamanne.githistory",
+                "mhutchie.git-graph",
+                "njpwerner.autodocstring",
+                "saoudrizwan.claude-dev",
+                "RooVeterinaryInc.roo-cline"
+            ]
+        }
+    },
+    // "runArgs": [
+    //     "--gpus",
+    //     "all"
+    // ]
+    // "forwardPorts": [9222],
+    // "postCreateCommand": "pip install -r ../requirements.txt"
+}
