@@ -26,13 +26,22 @@ ENV LC_ALL=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
 
 # ---------------------------------------------------
+# 環境変数
+# ---------------------------------------------------
+ENV LOG_FILE_NAME=app_prod.log
+
+# ---------------------------------------------------
 # アプリケーションコードのコピー
 # ---------------------------------------------------
-# WORKDIR /app
-# COPY ./src /app
+WORKDIR /app/logs
+WORKDIR /app
+COPY ./src /app
 
 # ---------------------------------------------------
 # Pythonパッケージのインストール
 # ---------------------------------------------------
-# COPY requirements.txt /tmp/requirements.txt
-# RUN pip install --no-cache-dir -r /tmp/requirements.txt
+COPY requirements.txt .python-version pyproject.toml uv.lock /app/
+RUN uv sync --frozen
+
+# CMD [ "python", "run.py" ]
+CMD [ "uv", "run", "run.py" ]

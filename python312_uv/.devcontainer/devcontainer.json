@@ -1,7 +1,7 @@
 {
     "name": "App",
     "build": {
-        "dockerfile": "../Dockerfile"
+        "dockerfile": "../Dockerfile_dev"
     },
     "customizations": {
         "vscode": {
